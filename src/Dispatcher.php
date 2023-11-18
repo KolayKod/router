@@ -53,11 +53,22 @@ class Dispatcher
      */
     public function dispatch(?string $method = null, ?string $path = null): mixed
     {
-        //Prepare defaults
+          //Prepare defaults
+
+        $scriptName = $_SERVER['SCRIPT_NAME']; 
+        $requestUri = $_SERVER['REQUEST_URI'];
+// Script adını çıkararak base path'i bul (örn: /buyboxApi)
+$basePath = dirname($scriptName);
+// REQUEST_URI'den base path'i çıkarma
+if (substr($requestUri, 0, strlen($basePath)) == $basePath) {
+    $requestUri = substr($requestUri, strlen($basePath));
+}
+        
         is_null($method) && $method = $_SERVER['REQUEST_METHOD'] ?? null;
         is_null($path) && $path = $_SERVER['REQUEST_URI'] ?? null;
 
-        $path = parse_url($path, PHP_URL_PATH);
+        //$path = parse_url($path, PHP_URL_PATH);
+        $path =  $requestUri ;
 
         if (!is_null($path)) {
             $path = trim($path, '/');
