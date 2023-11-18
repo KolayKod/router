@@ -7,7 +7,7 @@ Routing system based on regular expressions for PHP 8.1+ with native Middleware 
 ## How to install
 
 ```
-composer install corviz/router
+composer require KolayKod/router
 ```
 ---
 
